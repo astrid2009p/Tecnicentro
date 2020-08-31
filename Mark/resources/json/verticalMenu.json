@@ -1,0 +1,54 @@
+{
+  "menu": [
+    {
+      "url": "",
+      "name": "Dashboard",
+      "slug": "dashboard",
+      "icon": "feather icon-home"
+    },
+    {
+      "url": "",
+      "navheader": "General",
+      "icon": ""
+    },
+    {
+      "url": "",
+      "name": "Catalogues",
+      "icon": "feather icon-mailfeather icon-settings",
+      "submenu": [
+        {
+              "url": "/cliente",
+              "name": "client",
+              "icon": "feather icon-circle",
+              "i18n": "cliente"
+        },
+        {
+          "url":"",
+          "name":"Address",
+          "icon":"feather icon-mailfeather icon-settings",
+          "submenu": [
+            {
+              "url": "/pais",
+              "name": "Country",
+              "icon": "feather icon-circle",
+              "i18n": "pais"
+            },
+            {
+              "url": "/depto",
+              "name": "Department",
+              "icon": "feather icon-circle",
+              "i18n": "Departamentos"
+            },
+            {
+              "url": "/mun",
+              "name": "municipality",
+              "icon": "feather icon-circle",
+              "i18n": "Municipios"
+            }
+          ]
+        }
+      ]
+    }
+    
+  ]
+}
