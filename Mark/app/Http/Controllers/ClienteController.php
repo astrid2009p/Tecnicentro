@@ -6,7 +6,7 @@ use App\Cliente as c;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromCollection;
-
+use App\telefono;
 class ExportClients implements FromCollection
 {
     /**
@@ -59,16 +59,19 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validate($request, [
-        'dpi' => 'required|unique:cliente|regex:/^([0-9]){13}$/',
-        'PrimerNombre' => 'required|alpha',
-        'SegundoNombre' => 'required|alpha',
-        'TercerNombre' => 'alpha|nullable',
-        'PrimerApellido' => 'required|regex:/^[\pL\s\-]+$/u',
-        'SegundoApellido' => 'required|regex:/^[\pL\s\-]+$/u',
-        'ApellidoCasado' => 'regex:/^[\pL\s\-]+$/u|nullable',
-        'fecha' => 'required|nullable|date',
-      ]);
+      
+      
+
+      // $this->validate($request, [
+      //   'dpi' => 'required|unique:cliente|regex:/^([0-9]){13}$/',
+      //   'PrimerNombre' => 'required|alpha',
+      //   'SegundoNombre' => 'required|alpha',
+      //   'TercerNombre' => 'alpha|nullable',
+      //   'PrimerApellido' => 'required|regex:/^[\pL\s\-]+$/u',
+      //   'SegundoApellido' => 'required|regex:/^[\pL\s\-]+$/u',
+      //   'ApellidoCasado' => 'regex:/^[\pL\s\-]+$/u|nullable',
+      //   'fecha' => 'required|nullable|date',
+      // ]);
 
     $cl= new c();
     $cl->idEmpresa = 1;
@@ -79,11 +82,28 @@ class ClienteController extends Controller
     $cl->primerApellido = $request->PrimerApellido;
     $cl->segundoApellido = $request->SegundoApellido;
     $cl->apellidoCasado = $request->ApellidoCasado;
-
+    
+    
+    
+    
     $dateTime = Carbon::parse($request->fecha)->format('Y-m-d');
 
     $cl->fechaNacimiento = $request->fecha;
     $cl->save();
+      
+    $telefonos = [];
+
+    if (isset($request->tels)){
+    foreach($request->tels as $p){
+      $t = new telefono();
+      $t->idCliente = $cl->id;
+      $t->telefono = $p;
+      $telefonos[] = $t->attributesToArray();
+    }
+    }
+    
+    telefono::insert($telefonos);
+
     return redirect ('cliente')->with('success', 'cliente guardado');
 
     }
@@ -109,7 +129,7 @@ class ClienteController extends Controller
     {
       $breadcrumbs = [
         ['link'=>"/",'name'=>"Home"],['link'=>"/cliente", 'name'=>"Clientes"], ['name' => "Modificar Cliente"]];
-        $v = c::find($id);
+        $v = c::with('telefono')->find($id);
 
         return \view('/cliente/edit', compact('v','id'), ['breadcrumbs' => $breadcrumbs]);
     }
@@ -146,6 +166,23 @@ class ClienteController extends Controller
         $dateTime = Carbon::parse($request->fecha)->format('Y-m-d');
         $v->fechaNacimiento = $request->fecha;
         $v->save();
+
+        $t = telefono::where('idcliente','=',$v->id);
+        $t->delete();
+
+        $telefonos = [];
+        if (isset($request->tels)){
+    
+        foreach($request->tels as $p){
+          $t = new telefono();
+          $t->idCliente = $v->id;
+          $t->telefono = $p;
+          $telefonos[] = $t->attributesToArray();
+        }
+      }
+        telefono::insert($telefonos);
+        
+        
         return redirect('cliente')->with('success','cliente actualizada');
     }
 
@@ -157,15 +194,21 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
+        $t = telefono::where('idcliente','=',$id);
+        $t->delete();
+
         $v = c::find($id);
         $v->delete();
+        
+        
+
         return redirect('cliente')->with('success','cliente eliminado');
     }
 
     public function delete($id) {
       $breadcrumbs = [
         ['link'=>"/",'name'=>"Home"],['link'=>"/cliente", 'name'=>"Clientes"], ['name' => "Eliminar Cliente"]];
-        $v = c::find($id);
+        $v = c::with('telefono')->find($id);
         return \view('/cliente/del', compact('v','id'), ['breadcrumbs' => $breadcrumbs]);
     }
 

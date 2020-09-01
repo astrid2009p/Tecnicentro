@@ -28,4 +28,9 @@ class Cliente extends Model
         return $data;
     }
 
+    public function telefono () {
+        return $this->HasMany(telefono::class, 'idCliente', 'id');
+      }
+
+
 }
