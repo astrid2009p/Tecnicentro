@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\telefono;
+use App\Pais;
+
 class ExportClients implements FromCollection
 {
     /**
@@ -48,7 +50,9 @@ class ClienteController extends Controller
       $breadcrumbs = [
         ['link'=>"/",'name'=>"Home"],['link'=>"/cliente", 'name'=>"Clientes"], ['name' => "Nuevo Cliente"]];
 
-        return \view('/cliente/create', ['breadcrumbs' => $breadcrumbs]);
+        $pais = Pais::all();
+
+        return \view('/cliente/create',compact('pais'), ['breadcrumbs' => $breadcrumbs]);
     }
 
     /**
