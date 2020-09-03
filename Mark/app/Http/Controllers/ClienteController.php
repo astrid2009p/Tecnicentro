@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\telefono;
 use App\Pais;
+use App\direccion;
+use App\clientedireccion as cd;
 
 class ExportClients implements FromCollection
 {
@@ -98,15 +100,32 @@ class ClienteController extends Controller
     $telefonos = [];
 
     if (isset($request->tels)){
-    foreach($request->tels as $p){
-      $t = new telefono();
-      $t->idCliente = $cl->id;
-      $t->telefono = $p;
-      $telefonos[] = $t->attributesToArray();
-    }
+      foreach($request->tels as $p){
+        $t = new telefono();
+        $t->idCliente = $cl->id;
+        $t->telefono = $p;
+        $telefonos[] = $t->attributesToArray();
+      }
+      telefono::insert($telefonos);
     }
     
-    telefono::insert($telefonos);
+    $direccion = new direccion();
+    $direccion->idEmpresa = 1;
+    $direccion->calleave = $request->calleave;
+    $direccion->numero = $request->guion;
+    $direccion->zona = $request->zona;
+    $direccion->colonia = $request->colonia;
+    $direccion->idPais = $request->pais;
+    $direccion->idDepartamento = $request->depto;
+    $direccion->idMunicipio = $request->mun;
+    $direccion->save();
+
+    $cldir = new cd();
+    $cldir->idEmpresa = 1;
+    $cldir->idCliente = $cl->id;
+    $cldir->idDireccion = $direccion->id;
+    $cldir->save();
+
 
     return redirect ('cliente')->with('success', 'cliente guardado');
 

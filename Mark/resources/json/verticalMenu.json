@@ -18,7 +18,7 @@
       "submenu": [
         {
               "url": "/cliente",
-              "name": "client",
+              "name": "Client",
               "icon": "feather icon-circle",
               "i18n": "cliente"
         },

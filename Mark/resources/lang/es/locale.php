@@ -148,4 +148,5 @@ return [
     "Pricing" => "Pricing",
     "StatusAvailable" => "Disponible",
     "Address" => "Direccion",
+    "Client" => "Cliente",
 ];
