@@ -645,7 +645,7 @@
       var dato = $("#search").val();
       if (dato) {
         $.ajax({
-          url: "{{url('/filtro_cliente')}}/" + dato,
+          url: "{{url('/filtro_clienteim')}}/" + dato,
           type: "GET",
           dataType: "JSON",
           success: function (data) {
@@ -721,7 +721,7 @@
       var id = $("#marca").val();
       if(id){
         $.ajax({
-          url: "{{url('/filtro')}}/" + id,
+          url: "{{url('/filtroim')}}/" + id,
           type: "GET",
           dataType: "JSON",
           success: function (data) {
