@@ -203,4 +203,31 @@ Route::get('mun/delete/{id}','MunicipioController@Delete')->name('mun.delete');
 Route::get('mun/searchByDepto/{id}','MunicipioController@searchByDepto')->name('mun.searchByDepto');
 Route::resource('mun','MunicipioController');
 
+//COTIZACIONES PARTICULAR
+Route::get('/filtro_cliente/{id}', 'CotParticularController@filtro_cliente')->name('create.filtro_cliente');
+Route::get('/filtro_vehiculo/{id}', 'CotParticularController@filtro_vehiculo')->name('create.filtro_vehiculo');
+Route::get('/filtro/{id}', 'CotParticularController@filtro')->name('create.filtro');
+Route::post('cotizacion-particular/search', 'CotParticularController@search')->name('cotparticular.search');
+Route::get('cotizacion-particular/delete/{id}', 'CotParticularController@delete')->name('cotparticular.delete');
+Route::get('/cotizacion-particular/descargar', 'CotParticularController@download')->name('cotparticular.download');
+Route::resource('cotizacion-particular', 'CotParticularController');
+
+//COTIZACIONES IGSS VEHICULO
+Route::get('/filtro_cliente/{id}', 'CotIGSSVehiculoController@filtro_cliente')->name('create.filtro_cliente');
+Route::get('/filtro_vehiculoiv/{id}', 'CotIGSSVehiculoController@filtro_vehiculo')->name('create.filtro_vehiculo');
+Route::get('/filtro/{id}', 'CotIGSSVehiculoController@filtro')->name('create.filtro');
+Route::post('cotizacion-vehiculo/search', 'CotIGSSVehiculoController@search')->name('cotigssvehiculo.search');
+Route::get('cotizacion-vehiculo/delete/{id}', 'CotIGSSVehiculoController@delete')->name('cotigssvehiculo.delete');
+Route::get('/cotizacion-vehiculo/descargar', 'CotIGSSVehiculoController@download')->name('cotigssvehiculo.download');
+Route::resource('cotizacion-vehiculo', 'CotIGSSVehiculoController');
+
+//COTIZACIONES IGSS MOTO
+Route::get('/filtro_cliente/{id}', 'CotIGSSMotoController@filtro_cliente')->name('create.filtro_cliente');
+Route::get('/filtro_vehiculoim/{id}', 'CotIGSSMotoController@filtro_vehiculo')->name('create.filtro_vehiculo');
+Route::get('/filtro/{id}', 'CotIGSSMotoController@filtro')->name('create.filtro');
+Route::post('cotizacion-moto/search', 'CotIGSSMotoController@search')->name('cotigssmoto.search');
+Route::get('cotizacion-moto/delete/{id}', 'CotIGSSMotoController@delete')->name('cotigssmoto.delete');
+Route::get('/cotizacion-moto/descargar', 'CotIGSSMotoController@download')->name('cotigssmoto.download');
+Route::resource('cotizacion-moto', 'CotIGSSMotoController');
+
 });
