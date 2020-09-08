@@ -31,4 +31,8 @@ class direccion extends Model
     return $this->belongsto(municipio::class, 'id', 'idMunicipio');
   }
 
+  public function cliente(){
+    return $this->belongsToMany(cliente::class,'clientedireccion','idDireccion','idCliente');
+}
+
 }
