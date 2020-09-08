@@ -204,7 +204,29 @@ class ClienteController extends Controller
         }
       }
         telefono::insert($telefonos);
-        
+    
+    $d = cd::where('idcliente','=',$v->id);
+    $dir = direccion::where('id','=',$cd->idDireccion);
+    
+    $d->delete();
+    $dir->delete();
+            
+    $direccion = new direccion();
+    $direccion->idEmpresa = 1;
+    $direccion->calleave = $request->calleave;
+    $direccion->numero = $request->guion;
+    $direccion->zona = $request->zona;
+    $direccion->colonia = $request->colonia;
+    $direccion->idPais = $request->pais;
+    $direccion->idDepartamento = $request->depto;
+    $direccion->idMunicipio = $request->mun;
+    $direccion->save();
+
+    $cldir = new cd();
+    $cldir->idEmpresa = 1;
+    $cldir->idCliente = $cl->id;
+    $cldir->idDireccion = $direccion->id;
+    $cldir->save();
         
         return redirect('cliente')->with('success','cliente actualizada');
     }

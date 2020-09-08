@@ -12,10 +12,12 @@ class clientedireccion extends Model
     protected $fillable = ['id','idEmpresa','idCliente','idDireccion'];
 
     public function cliente () {
-        return $this->belongsToMany(cliente::class, 'id', 'idCliente');
+        return $this->belongsTo(cliente::class, 'id', 'idCliente');
     }
   
     public function direccion () {
-        return $this->belongsToMany(direccion::class, 'id', 'idDireccion');
+        return $this->belongsTo(direccion::class, 'id', 'idDireccion');
     }
+
+    
 }
