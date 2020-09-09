@@ -164,7 +164,8 @@
                                         <div class="col-md-6 col-12">
                                             <div class="form-label-group">
                                                 <div class="table-responsive">
-                                                    <table name="tel" id="tel" class="table table-hover-animation table-striped">
+                                                    <table name="tel" id="tel"
+                                                        class="table table-hover-animation table-striped">
                                                         <thead>
                                                             <tr class="">
                                                                 <th scope="col">Telefonos</th>
@@ -172,7 +173,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -180,7 +181,6 @@
                                         </div>
 
 
-<<<<<<< HEAD
                                         <div class="col-md-6 col-12">
                                             <div class="form-label-group">
                                                 <div class="col-md-5">
@@ -284,8 +284,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-=======
->>>>>>> parent of 6d97ef4... validaciones
                                         <div class="col-md-8 offset-md-4">
                                             <a href="{{ URL::previous() }}"
                                                 class="btn btn-outline-warning mr-1 mb-1 waves-effect waves-light">Regresar</a>
@@ -311,38 +309,93 @@
 @section('page-script')
     <!-- Page js files -->
     <script>
-                   
-            function Insert() {
-                var id = $("#telefono").val();
-                var tableRef = document.getElementById('tel').getElementsByTagName('tbody')[0];
-                var newRow = tableRef.insertRow();
-                newRow.id = id;
-                
-                var newCell = newRow.insertCell(0);
-                var newCellb = newRow.insertCell(1);
-                var newCellc = newRow.insertCell(2);
+        $(document).ready(function(e) {
 
-                var newText = document.createTextNode(id);
-                newCell.appendChild(newText);
-                newCellb.innerHTML = "<a onclick=Remove("+ id +")><i class=\"feather icon-trash\"></i></a></span>";
+            $("#pais").change(function() {
+                var id = $("#pais").val();
 
-                var input = document.createElement('input');
-                input.name = "tels[]";
-                input.setAttribute('value', id);
-                input.type = "text";
-                input.hidden =true;
-                
-                newCellc.appendChild(input);
+                if (id) {
+                    $.ajax({
+                        url: "{{ url('/depto/searchByCountry') }}/" + id,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            console.log('data => ', data);
+                            $('#depto').empty();
+                            $('#depto').append("<option value='0'></option>");
+                            data.forEach(element => {
+                                $('#depto').append("<option value='" + element['id'] +
+                                    "'>" + element['departamento'] + "</option>");
+                            });
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                } else {
+                    $('#det').empty();
+                }
 
-                $("#telefono").val('');
-            }
+            })
 
-            function Remove(id) {
-                var row = document.getElementById(id);
-                row.parentNode.removeChild(row);
-            }
+            $("#depto").change(function() {
+                var id = $("#depto").val();
 
-      
+                if (id) {
+                    $.ajax({
+                        url: "{{ url('/mun/searchByDepto') }}/" + id,
+                        type: "GET",
+                        dataType: "JSON",
+                        success: function(data) {
+                            console.log('data => ', data);
+                            $('#mun').empty();
+                            $('#mun').append("<option value='0'></option>");
+                            data.forEach(element => {
+                                $('#mun').append("<option value='" + element['id'] +
+                                    "'>" + element['municipio'] + "</option>");
+                            });
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                } else {
+                    $('#det').empty();
+                }
+
+            })
+
+        });
+
+        function Insert() {
+            var id = $("#telefono").val();
+            var tableRef = document.getElementById('tel').getElementsByTagName('tbody')[0];
+            var newRow = tableRef.insertRow();
+            newRow.id = id;
+
+            var newCell = newRow.insertCell(0);
+            var newCellb = newRow.insertCell(1);
+            var newCellc = newRow.insertCell(2);
+
+            var newText = document.createTextNode(id);
+            newCell.appendChild(newText);
+            newCellb.innerHTML = "<a onclick=Remove(" + id + ")><i class=\"feather icon-trash\"></i></a></span>";
+
+            var input = document.createElement('input');
+            input.name = "tels[]";
+            input.setAttribute('value', id);
+            input.type = "text";
+            input.hidden = true;
+
+            newCellc.appendChild(input);
+
+            $("#telefono").val('');
+        }
+
+        function Remove(id) {
+            var row = document.getElementById(id);
+            row.parentNode.removeChild(row);
+        }
 
     </script>
 

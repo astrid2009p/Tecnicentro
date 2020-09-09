@@ -117,6 +117,7 @@ return [
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
     'LettersWhiteSpaces' => 'Los valores deben ser letras',
+    'OnlyNumbers' => 'El valor debe ser un numero de 14 digitos',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

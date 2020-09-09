@@ -105,7 +105,28 @@ CREATE TABLE `empresa` (
 
 /*Data for the table `empresa` */
 
+<<<<<<< HEAD
+insert  into `departamento`(`idPais`,`id`,`departamento`,`created_at`,`updated_at`) values
+(1,2,'Guatemala','2020-08-27 14:33:57','2020-08-27 14:33:57'),
+(1,3,'El Progreso','2020-08-28 16:24:09','2020-08-28 16:24:09');
+
+/*Table structure for table `empresa` */
+
+DROP TABLE IF EXISTS `empresa`;
+
+CREATE TABLE `empresa` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `empresa` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idDireccion` int unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `empresa` */
+
+insert  into `empresa`(`id`,`empresa`,`idDireccion`) values
+=======
 insert  into `empresa`(`id`,`empresa`,`idDireccion`) values 
+>>>>>>> parent of 6d97ef4... validaciones
 (1,'Gallo 25',122),
 (7,'Pepsi',1997),
 (8,'IGGS',157);
@@ -239,7 +260,11 @@ CREATE TABLE `pais` (
 
 /*Data for the table `pais` */
 
+<<<<<<< HEAD
+insert  into `pais`(`id`,`pais`,`created_at`,`updated_at`) values
+=======
 insert  into `pais`(`id`,`pais`,`created_at`,`updated_at`) values 
+>>>>>>> parent of 6d97ef4... validaciones
 (1,'Guatemala',NULL,NULL),
 (2,'Honduras',NULL,NULL),
 (3,'El Salvador',NULL,'2020-08-20 06:36:27'),

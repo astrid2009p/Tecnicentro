@@ -7,13 +7,10 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\telefono;
-<<<<<<< HEAD
 use App\Pais;
 use App\direccion;
 use App\clientedireccion as cd;
 
-=======
->>>>>>> parent of 6d97ef4... validaciones
 class ExportClients implements FromCollection
 {
     /**
@@ -55,7 +52,9 @@ class ClienteController extends Controller
       $breadcrumbs = [
         ['link'=>"/",'name'=>"Home"],['link'=>"/cliente", 'name'=>"Clientes"], ['name' => "Nuevo Cliente"]];
 
-        return \view('/cliente/create', ['breadcrumbs' => $breadcrumbs]);
+        $pais = Pais::all();
+
+        return \view('/cliente/create',compact('pais'), ['breadcrumbs' => $breadcrumbs]);
     }
 
     /**
@@ -69,16 +68,16 @@ class ClienteController extends Controller
       
       
 
-      // $this->validate($request, [
-      //   'dpi' => 'required|unique:cliente|regex:/^([0-9]){13}$/',
-      //   'PrimerNombre' => 'required|alpha',
-      //   'SegundoNombre' => 'required|alpha',
-      //   'TercerNombre' => 'alpha|nullable',
-      //   'PrimerApellido' => 'required|regex:/^[\pL\s\-]+$/u',
-      //   'SegundoApellido' => 'required|regex:/^[\pL\s\-]+$/u',
-      //   'ApellidoCasado' => 'regex:/^[\pL\s\-]+$/u|nullable',
-      //   'fecha' => 'required|nullable|date',
-      // ]);
+      $this->validate($request, [
+        'dpi' => 'required|unique:cliente|regex:/^([0-9]){13}$/',
+        'PrimerNombre' => 'required|alpha',
+        'SegundoNombre' => 'required|alpha',
+        'TercerNombre' => 'alpha|nullable',
+        'PrimerApellido' => 'required|regex:/^[\pL\s\-]+$/u',
+        'SegundoApellido' => 'required|regex:/^[\pL\s\-]+$/u',
+        'ApellidoCasado' => 'regex:/^[\pL\s\-]+$/u|nullable',
+        'fecha' => 'required|nullable|date',
+      ]);
 
     $cl= new c();
     $cl->idEmpresa = 1;
