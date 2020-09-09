@@ -181,7 +181,6 @@
 
 
 <<<<<<< HEAD
-<<<<<<< HEAD
                                         <div class="col-md-6 col-12">
                                             <div class="form-label-group">
                                                 <div class="col-md-5">
@@ -285,8 +284,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-=======
->>>>>>> parent of 6d97ef4... validaciones
 =======
 >>>>>>> parent of 6d97ef4... validaciones
                                         <div class="col-md-8 offset-md-4">

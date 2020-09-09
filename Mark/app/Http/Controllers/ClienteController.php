@@ -8,13 +8,10 @@ use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\telefono;
 <<<<<<< HEAD
-<<<<<<< HEAD
 use App\Pais;
 use App\direccion;
 use App\clientedireccion as cd;
 
-=======
->>>>>>> parent of 6d97ef4... validaciones
 =======
 >>>>>>> parent of 6d97ef4... validaciones
 class ExportClients implements FromCollection
