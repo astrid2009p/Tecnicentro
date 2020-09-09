@@ -5,6 +5,11 @@ return [
     "Country" => "Países",
     "Department" => "Departamentos",
     "municipality" => "Municipios",
+    "Quotes" => "Cotizaciones",
+    "IGSS" => "IGSS",
+    "Vehicles" => "Vehiculos",
+    "Motorcycles" => "Motos",
+    "Particular" => "Particulares",
     "Dashboard" => "Dashboard",
     "Analytics" => "Analytics",
     "eCommerce" => "eCommerce",
@@ -148,4 +153,5 @@ return [
     "Pricing" => "Pricing",
     "StatusAvailable" => "Disponible",
     "Address" => "Direccion",
+    "Client" => "Cliente",
 ];

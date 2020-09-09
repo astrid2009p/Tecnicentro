@@ -70,6 +70,9 @@ CREATE TABLE `empresas` (
 
 /*Data for the table `empresas` */
 
+CREATE DATABASE `proyecto`;
+USE `proyecto`;
+
 /*Table structure for table `cliente` */
 
 DROP TABLE IF EXISTS `cliente`;
@@ -92,7 +95,7 @@ CREATE TABLE `cliente` (
 
 /*Data for the table `cliente` */
 
-insert  into `cliente`(`id`,`idEmpresa`,`dpi`,`primerNombre`,`segundoNombre`,`tercerNombre`,`primerApellido`,`segundoApellido`,`apellidoCasado`,`fechaNacimiento`) values 
+insert  into `cliente`(`id`,`idEmpresa`,`dpi`,`primerNombre`,`segundoNombre`,`tercerNombre`,`primerApellido`,`segundoApellido`,`apellidoCasado`,`fechaNacimiento`) values
 (1,1,1231211234567,'jose','irene',NULL,'juarez','garcias',NULL,'1993-05-22'),
 (8,1,1245445454545,'jorge','mayen',NULL,'jhgjhg','jhghjg','mayen','2020-07-28'),
 (9,1,1111111111111,'Jaime','alejandro',NULL,'Noj','garcia',NULL,'1990-01-15');
@@ -140,6 +143,27 @@ CREATE TABLE `departamento` (
 /*Data for the table `departamento` */
 
 
+insert  into `departamento`(`idPais`,`id`,`departamento`,`created_at`,`updated_at`) values
+(1,2,'Guatemala','2020-08-27 14:33:57','2020-08-27 14:33:57'),
+(1,3,'El Progreso','2020-08-28 16:24:09','2020-08-28 16:24:09');
+
+/*Table structure for table `empresa` */
+
+DROP TABLE IF EXISTS `empresa`;
+
+CREATE TABLE `empresa` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `empresa` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idDireccion` int unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `empresa` */
+
+insert  into `empresa`(`id`,`empresa`,`idDireccion`) values
+(1,'Gallo 25',122),
+(7,'Pepsi',1997),
+(8,'IGGS',157);
 
 
 
@@ -172,7 +196,7 @@ CREATE TABLE `migrations` (
 
 /*Data for the table `migrations` */
 
-insert  into `migrations`(`id`,`migration`,`batch`) values 
+insert  into `migrations`(`id`,`migration`,`batch`) values
 (1,'2014_10_12_000000_create_users_table',1),
 (2,'2019_08_19_000000_create_failed_jobs_table',1),
 (3,'2014_10_12_100000_create_password_resets_table',2),
@@ -240,12 +264,18 @@ CREATE TABLE `municipio` (
 
 /*Data for the table `municipio` */
 
-insert  into `municipio`(`id`,`idPais`,`idDepartamento`,`municipio`,`created_at`,`updated_at`) values 
+insert  into `municipio`(`id`,`idPais`,`idDepartamento`,`municipio`,`created_at`,`updated_at`) values
 (1,1,2,'Guatemala','2020-08-28 13:55:27','2020-08-28 17:24:24');
 
 
 
 
+insert  into `pais`(`id`,`pais`,`created_at`,`updated_at`) values
+(1,'Guatemala',NULL,NULL),
+(2,'Honduras',NULL,NULL),
+(3,'El Salvador',NULL,'2020-08-20 06:36:27'),
+(4,'Nicaragua','2020-08-20 03:25:53','2020-08-20 03:25:53'),
+(5,'Costa Rica','2020-08-21 17:08:21','2020-08-21 17:08:21');
 
 /*Table structure for table `password_resets` */
 
@@ -324,7 +354,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) values 
+insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`) values
 (1,'edilser','a@a.com',NULL,'$2y$10$sHcH..YZaqjm3X.B9TsTN.oyE6uG7tUeaucIOxAlC/xnL8kyNeWxy',NULL,'2020-08-07 05:08:39','2020-08-07 05:08:39');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
