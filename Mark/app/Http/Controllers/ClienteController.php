@@ -8,8 +8,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\telefono;
 use App\Pais;
-use App\direccion;
-use App\clientedireccion as cd;
 
 class ExportClients implements FromCollection
 {
@@ -68,16 +66,16 @@ class ClienteController extends Controller
       
       
 
-      // $this->validate($request, [
-      //   'dpi' => 'required|unique:cliente|regex:/^([0-9]){13}$/',
-      //   'PrimerNombre' => 'required|alpha',
-      //   'SegundoNombre' => 'required|alpha',
-      //   'TercerNombre' => 'alpha|nullable',
-      //   'PrimerApellido' => 'required|regex:/^[\pL\s\-]+$/u',
-      //   'SegundoApellido' => 'required|regex:/^[\pL\s\-]+$/u',
-      //   'ApellidoCasado' => 'regex:/^[\pL\s\-]+$/u|nullable',
-      //   'fecha' => 'required|nullable|date',
-      // ]);
+      $this->validate($request, [
+        'dpi' => 'required|unique:cliente|regex:/^([0-9]){13}$/',
+        'PrimerNombre' => 'required|alpha',
+        'SegundoNombre' => 'required|alpha',
+        'TercerNombre' => 'alpha|nullable',
+        'PrimerApellido' => 'required|regex:/^[\pL\s\-]+$/u',
+        'SegundoApellido' => 'required|regex:/^[\pL\s\-]+$/u',
+        'ApellidoCasado' => 'regex:/^[\pL\s\-]+$/u|nullable',
+        'fecha' => 'required|nullable|date',
+      ]);
 
     $cl= new c();
     $cl->idEmpresa = 1;
@@ -100,32 +98,15 @@ class ClienteController extends Controller
     $telefonos = [];
 
     if (isset($request->tels)){
-      foreach($request->tels as $p){
-        $t = new telefono();
-        $t->idCliente = $cl->id;
-        $t->telefono = $p;
-        $telefonos[] = $t->attributesToArray();
-      }
-      telefono::insert($telefonos);
+    foreach($request->tels as $p){
+      $t = new telefono();
+      $t->idCliente = $cl->id;
+      $t->telefono = $p;
+      $telefonos[] = $t->attributesToArray();
+    }
     }
     
-    $direccion = new direccion();
-    $direccion->idEmpresa = 1;
-    $direccion->calleave = $request->calleave;
-    $direccion->numero = $request->guion;
-    $direccion->zona = $request->zona;
-    $direccion->colonia = $request->colonia;
-    $direccion->idPais = $request->pais;
-    $direccion->idDepartamento = $request->depto;
-    $direccion->idMunicipio = $request->mun;
-    $direccion->save();
-
-    $cldir = new cd();
-    $cldir->idEmpresa = 1;
-    $cldir->idCliente = $cl->id;
-    $cldir->idDireccion = $direccion->id;
-    $cldir->save();
-
+    telefono::insert($telefonos);
 
     return redirect ('cliente')->with('success', 'cliente guardado');
 

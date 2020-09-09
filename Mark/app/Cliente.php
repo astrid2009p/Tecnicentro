@@ -32,11 +32,5 @@ class Cliente extends Model
         return $this->HasMany(telefono::class, 'idCliente', 'id');
       }
 
-    public function direccion(){
-        return $this->HasMany(clientedireccion::class,'idCliente','id');
-    }
-
-    
-
 
 }
