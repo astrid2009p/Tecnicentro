@@ -15,9 +15,12 @@ MySQL - 8.0.21 : Database - mark1
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`mark1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `mark1`;
+<<<<<<< HEAD
 
 CREATE DATABASE `proyecto`;
 USE `proyecto`;
+=======
+>>>>>>> parent of 6d97ef4... validaciones
 
 /*Table structure for table `cliente` */
 
