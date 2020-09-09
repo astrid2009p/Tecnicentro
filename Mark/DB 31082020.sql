@@ -12,30 +12,82 @@ MySQL - 8.0.21 : Database - mark1
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
--- CREATE DATABASE /*!32312 IF NOT EXISTS*/`mark1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`mark1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
--- USE `mark1`;
+USE `mark1`;
 
-/*Table structure for table `pais` */
+/*Table structure for table `cliente` */
 
-DROP TABLE IF EXISTS `pais`;
+DROP TABLE IF EXISTS `cliente`;
 
-CREATE TABLE `pais` (
+CREATE TABLE `cliente` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `pais` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idEmpresa` bigint unsigned NOT NULL,
+  `dpi` bigint unsigned NOT NULL,
+  `primerNombre` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `segundoNombre` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tercerNombre` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `primerApellido` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `segundoApellido` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `apellidoCasado` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fechaNacimiento` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cliente_idempresa_foreign` (`idEmpresa`),
+  CONSTRAINT `cliente_idempresa_foreign` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `cliente` */
+
+insert  into `cliente`(`id`,`idEmpresa`,`dpi`,`primerNombre`,`segundoNombre`,`tercerNombre`,`primerApellido`,`segundoApellido`,`apellidoCasado`,`fechaNacimiento`) values 
+(1,1,1231211234567,'jose','irene',NULL,'juarez','garcias',NULL,'1993-05-22'),
+(8,1,1245445454545,'jorge','mayen',NULL,'jhgjhg','jhghjg','mayen','2020-07-28'),
+(9,1,1111111111111,'Jaime','alejandro',NULL,'Noj','garcia',NULL,'1990-01-15');
+
+/*Table structure for table `clientes` */
+
+DROP TABLE IF EXISTS `clientes`;
+
+CREATE TABLE `clientes` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `idEmpresa` bigint unsigned NOT NULL,
+  `dpi` bigint NOT NULL,
+  `primerNombre` int NOT NULL,
+  `segundoNombre` int NOT NULL,
+  `tercerNombre` int DEFAULT NULL,
+  `primerApellido` int NOT NULL,
+  `segundoApellido` int DEFAULT NULL,
+  `apellidoCasado` int DEFAULT NULL,
+  `fechaNacimiento` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `clientes_dpi_unique` (`dpi`),
+  KEY `clientes_idempresa_foreign` (`idEmpresa`),
+  CONSTRAINT `clientes_idempresa_foreign` FOREIGN KEY (`idEmpresa`) REFERENCES `empresas` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-insert  into `pais`(`id`,`pais`,`created_at`,`updated_at`) values 
-(1,'Guatemala',NULL,NULL),
-(2,'Honduras',NULL,NULL),
-(3,'El Salvador',NULL,'2020-08-20 06:36:27'),
-(4,'Nicaragua','2020-08-20 03:25:53','2020-08-20 03:25:53'),
-(5,'Costa Rica','2020-08-21 17:08:21','2020-08-21 17:08:21');
+/*Data for the table `clientes` */
 
-/*Data for the table `pais` */
+/*Table structure for table `departamento` */
+
+DROP TABLE IF EXISTS `departamento`;
+
+CREATE TABLE `departamento` (
+  `idPais` bigint unsigned NOT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `departamento` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `departamento_idpais_foreign` (`idPais`),
+  CONSTRAINT `departamento_idpais_foreign` FOREIGN KEY (`idPais`) REFERENCES `pais` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `departamento` */
+
+insert  into `departamento`(`idPais`,`id`,`departamento`,`created_at`,`updated_at`) values 
+(1,2,'Guatemala','2020-08-27 14:33:57','2020-08-27 14:33:57'),
+(1,3,'El Progreso','2020-08-28 16:24:09','2020-08-28 16:24:09');
 
 /*Table structure for table `empresa` */
 
@@ -69,79 +121,6 @@ CREATE TABLE `empresas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `empresas` */
-
-/*Table structure for table `cliente` */
-
-DROP TABLE IF EXISTS `cliente`;
-
-CREATE TABLE `cliente` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `idEmpresa` bigint unsigned NOT NULL,
-  `dpi` bigint unsigned NOT NULL,
-  `primerNombre` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `segundoNombre` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tercerNombre` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `primerApellido` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `segundoApellido` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `apellidoCasado` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fechaNacimiento` date NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cliente_idempresa_foreign` (`idEmpresa`),
-  CONSTRAINT `cliente_idempresa_foreign` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `cliente` */
-
-insert  into `cliente`(`id`,`idEmpresa`,`dpi`,`primerNombre`,`segundoNombre`,`tercerNombre`,`primerApellido`,`segundoApellido`,`apellidoCasado`,`fechaNacimiento`) values 
-(1,1,1231211234567,'jose','irene',NULL,'juarez','garcias',NULL,'1993-05-22'),
-(8,1,1245445454545,'jorge','mayen',NULL,'jhgjhg','jhghjg','mayen','2020-07-28'),
-(9,1,1111111111111,'Jaime','alejandro',NULL,'Noj','garcia',NULL,'1990-01-15');
-
--- /*Table structure for table `clientes` */
-
--- DROP TABLE IF EXISTS `clientes`;
-
--- CREATE TABLE `clientes` (
---   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
---   `idEmpresa` bigint unsigned NOT NULL,
---   `dpi` bigint NOT NULL,
---   `primerNombre` int NOT NULL,
---   `segundoNombre` int NOT NULL,
---   `tercerNombre` int DEFAULT NULL,
---   `primerApellido` int NOT NULL,
---   `segundoApellido` int DEFAULT NULL,
---   `apellidoCasado` int DEFAULT NULL,
---   `fechaNacimiento` date NOT NULL,
---   `created_at` timestamp NULL DEFAULT NULL,
---   `updated_at` timestamp NULL DEFAULT NULL,
---   PRIMARY KEY (`id`),
---   UNIQUE KEY `clientes_dpi_unique` (`dpi`),
---   KEY `clientes_idempresa_foreign` (`idEmpresa`),
---   CONSTRAINT `clientes_idempresa_foreign` FOREIGN KEY (`idEmpresa`) REFERENCES `empresas` (`id`)
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- /*Data for the table `clientes` */
-
-/*Table structure for table `departamento` */
-
-DROP TABLE IF EXISTS `departamento`;
-
-CREATE TABLE `departamento` (
-  `idPais` bigint unsigned NOT NULL,
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `departamento` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `departamento_idpais_foreign` (`idPais`),
-  CONSTRAINT `departamento_idpais_foreign` FOREIGN KEY (`idPais`) REFERENCES `pais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-/*Data for the table `departamento` */
-
-
-
-
 
 /*Table structure for table `failed_jobs` */
 
@@ -243,9 +222,26 @@ CREATE TABLE `municipio` (
 insert  into `municipio`(`id`,`idPais`,`idDepartamento`,`municipio`,`created_at`,`updated_at`) values 
 (1,1,2,'Guatemala','2020-08-28 13:55:27','2020-08-28 17:24:24');
 
+/*Table structure for table `pais` */
 
+DROP TABLE IF EXISTS `pais`;
 
+CREATE TABLE `pais` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `pais` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+/*Data for the table `pais` */
+
+insert  into `pais`(`id`,`pais`,`created_at`,`updated_at`) values 
+(1,'Guatemala',NULL,NULL),
+(2,'Honduras',NULL,NULL),
+(3,'El Salvador',NULL,'2020-08-20 06:36:27'),
+(4,'Nicaragua','2020-08-20 03:25:53','2020-08-20 03:25:53'),
+(5,'Costa Rica','2020-08-21 17:08:21','2020-08-21 17:08:21');
 
 /*Table structure for table `password_resets` */
 

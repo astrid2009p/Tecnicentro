@@ -15,14 +15,6 @@ class MunicipioController extends Controller
     var $messages = ['mun.required' => 'El campo :attribute es requerido',
                       'mun.regex' => 'El campo :attribute debe contener solamente letras'  ];
 
-    
-    public function searchByDepto($id)
-    {
-        $mun = Municipio::where('idDepartamento', $id)->get();
-        $mun = $mun->makeVisible('id');
-        return json_encode($mun);
-    }
-
     public function delete($id)
     {
         $breadcrumbs = [

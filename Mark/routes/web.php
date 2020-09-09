@@ -200,7 +200,6 @@ Route::resource('depto','departamentoController');
 Route::get('mun/search','MunicipioController@Search')->name('mun.search');
 Route::get('mun/descargar','MunicipioController@Download')->name('mun.download');
 Route::get('mun/delete/{id}','MunicipioController@Delete')->name('mun.delete');
-Route::get('mun/searchByDepto/{id}','MunicipioController@searchByDepto')->name('mun.searchByDepto');
 Route::resource('mun','MunicipioController');
 
 });
