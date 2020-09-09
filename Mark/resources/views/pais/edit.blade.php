@@ -4,6 +4,7 @@
 
 @section('vendor-style')
     <!-- vendor css files -->
+    <link rel="stylesheet" href="{{ asset(mix('css/pages/data-list-view.css')) }}">
 @endsection
 @section('page-style')
     <!-- Page css files -->
@@ -37,7 +38,7 @@
                                                     name="pais" placeholder="País"  value="{{ $pais->pais }}"
                                                     required 
                                                     data-validation-required-message='{{ __('validation.required') }}'
-                                                    data-validation-regex-regex="^[a-zA-Z\-\s]+$" 
+                                                    data-validation-regex-regex="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" 
                                                     data-validation-regex-message=' {{ __('validation.LettersWhiteSpaces') }} '   
                                                     >
                                                     <p class="help-block"></p>
