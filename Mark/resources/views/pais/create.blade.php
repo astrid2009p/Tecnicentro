@@ -8,7 +8,7 @@
 @endsection
 @section('page-style')
     <!-- Page css files -->
-    <link rel="stylesheet" type="text/css" href={{ asset(mix('/css/plugins/forms/validation/form-validation.css')) }}>
+    
 @endsection
 
 @section('content')
@@ -34,16 +34,15 @@
                                                 <span>País</span>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="text" id="pais"
-                                                    class="form-control"
-                                                    name="pais" placeholder="País"
-                                                    required 
-                                                    data-validation-required-message='{{ __('validation.required') }}'
-                                                    data-validation-regex-regex="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" 
-                                                    data-validation-regex-message=' {{ __('validation.LettersWhiteSpaces') }} '   
-                                                    >
-                                                    <p class="help-block"></p> 
+                                                <input type="text" id="pais" class="form-control" name="pais"
+                                                    placeholder="País">
                                             </div>
+                                            @error('pais')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                          @enderror
+                                        </div>
                                     </div>
                                     <div class="col-md-8 offset-md-4">
                                         <a href="{{ URL::previous() }}"
@@ -67,10 +66,10 @@
 
 @section('vendor-script')
     <!-- vendor files -->
-    <script src="{{ asset(mix('/vendors/js/forms/validation/jqBootstrapValidation.js')) }}"></script>
+
 
 @endsection
 @section('page-script')
     <!-- Page js files -->
-    <script src="{{ asset(mix('js/scripts/forms/validation/form-validation.js')) }}"></script>
+
 @endsection

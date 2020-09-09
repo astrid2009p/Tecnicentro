@@ -4,7 +4,6 @@
 
 @section('vendor-style')
     <!-- vendor css files -->
-    <link rel="stylesheet" href="{{ asset(mix('css/pages/data-list-view.css')) }}">
 @endsection
 @section('page-style')
     <!-- Page css files -->
@@ -18,6 +17,7 @@
             <div class="col-md-8 col-12">
                 {!! Form::model($depto, ['route' => ['depto.update', $id], 'method' => 'put', 'novalidate', 'class' =>
                 'form-horizontal']) !!}
+
                 <div class="card" style="height: 419px;">
                     <div class="card-header">
                         <h4 class="card-title">Editar Departamento</h4>
@@ -56,10 +56,11 @@
                                                     name="depto" placeholder="Departamento"  value="{{ $depto->departamento }}"
                                                     required 
                                                     data-validation-required-message='{{ __('validation.required') }}'
-                                                    data-validation-regex-regex="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" 
+                                                    data-validation-regex-regex="^[a-zA-Z\-\s]+$" 
                                                     data-validation-regex-message=' {{ __('validation.LettersWhiteSpaces') }} '   
                                                     >
-                                                    <p class="help-block"></p> 
+                                                    <p class="help-block"></p>
+                                                
                                             </div>
 
 
