@@ -123,7 +123,6 @@
                   console.log('data => ',data);
                   $('#depto').empty();
                   data.forEach(element => {
-                    $('#depto').append("<option value='0'></option>");
                     $('#depto').append("<option value='"+ element['id'] +"'>"+element['departamento']+"</option>");
                   });
                 },
