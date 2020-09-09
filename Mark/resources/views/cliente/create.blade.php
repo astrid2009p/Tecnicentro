@@ -181,55 +181,6 @@
                                         </div>
 
 
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-label-group">
-                                                <div class="col-md-5">
-                                                    <span>Calle o Avenida</span>
-                                                </div>
-
-                                                <input id="calleave" placeholder="Calle o Avenida" type="text"
-                                                class="form-control @error('calleave') is-invalid @enderror"
-                                                name="calleave" value="{{ old('calleave') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-label-group">
-                                                <div class="col-md-5">
-                                                    <span># Casa</span>
-                                                </div>
-
-                                                <input id="guion" placeholder="# Casa" type="text"
-                                                class="form-control @error('guion') is-invalid @enderror"
-                                                name="guion" value="{{ old('guion') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-label-group">
-                                                <div class="col-md-5">
-                                                    <span>Zona</span>
-                                                </div>
-
-                                                <input id="zona" placeholder="Zona" type="text"
-                                                class="form-control @error('zona') is-invalid @enderror"
-                                                name="zona" value="{{ old('zona') }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-label-group">
-                                                <div class="col-md-5">
-                                                    <span>Colonia</span>
-                                                </div>
-
-                                                <input id="colonia" placeholder="Colonia" type="text"
-                                                class="form-control @error('colonia') is-invalid @enderror"
-                                                name="colonia" value="{{ old('colonia') }}">
-                                            </div>
-                                        </div>
-                                        
-
                                         <div class="col-md-4 col-12">
                                             <div class="form-label-group">
                                                 <div class="col-md-2">
@@ -284,6 +235,8 @@
                                                 @enderror
                                             </div>
                                         </div>
+
+
                                         <div class="col-md-8 offset-md-4">
                                             <a href="{{ URL::previous() }}"
                                                 class="btn btn-outline-warning mr-1 mb-1 waves-effect waves-light">Regresar</a>
