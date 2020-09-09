@@ -8,7 +8,7 @@
 @endsection
 @section('page-style')
     <!-- Page css files -->
-    
+    <link rel="stylesheet" type="text/css" href={{ asset(mix('/css/plugins/forms/validation/form-validation.css')) }}>
 @endsection
 
 @section('content')
@@ -18,7 +18,6 @@
             <div class="col-md-8 col-12">
                 {!! Form::open(['route' => 'mun.store', 'method' => 'post', 'novalidate', 'class' => 'form-horizontal'])
                 !!}
-
                 <div class="card" style="height: 419px;">
                     <div class="card-header">
                         <h4 class="card-title">Nuevo Municipio</h4>
@@ -34,12 +33,14 @@
                                                 <span>Pais</span>
                                             </div>
                                             <div class="col-md-8">
+                                            
                                             <select required="required" class="form-control @error('pais') is-invalid @enderror" id="pais" name="pais">
                                               <option></option>
                                               @foreach ($pais as $p)
                                                 <option value="{{$p->id}}">{{$p->pais}}</option>
                                               @endforeach
                                             </select>
+                                            
                                             </div>
                                             @error('pais')
                                                 <span class="invalid-feedback" role="alert">
@@ -70,13 +71,13 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <input type="text" id="mun" class="form-control" name="mun"
-                                                    placeholder="Municipio">
+                                                    placeholder="Municipio"
+                                                    required 
+                                                    data-validation-required-message='{{ __('validation.required') }}'
+                                                    data-validation-regex-regex="^^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" 
+                                                    data-validation-regex-message=' {{ __('validation.LettersWhiteSpaces') }} '>
+                                                    <p class="help-block"></p>
                                             </div>
-                                            @error('mun')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                          @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-8 offset-md-4">
@@ -101,11 +102,12 @@
 
 @section('vendor-script')
     <!-- vendor files -->
-
+    <script src="{{ asset(mix('/vendors/js/forms/validation/jqBootstrapValidation.js')) }}"></script> 
 
 @endsection
 @section('page-script')
     <!-- Page js files -->
+    <script src="{{ asset(mix('js/scripts/forms/validation/form-validation.js')) }}"></script>
 
     <script>
         $(document).ready(function(e){

@@ -8,7 +8,7 @@
 @endsection
 @section('page-style')
     <!-- Page css files -->
-
+    <link rel="stylesheet" type="text/css" href={{ asset(mix('/css/plugins/forms/validation/form-validation.css')) }}>
 @endsection
 
 @section('content')
@@ -16,10 +16,8 @@
     <div class="card-content">
         <div class="card-body">
             <div class="col-md-8 col-12">
-
                 {!! Form::model($mun, ['route' => ['mun.update', $id], 'method' => 'put', 'novalidate', 'class' =>
                 'form-horizontal']) !!}
-
                 <div class="card" style="height: 419px;">
                     <div class="card-header">
                         <h4 class="card-title">Editar Municipio</h4>
@@ -86,15 +84,17 @@
                                                 <span>Municipio</span>
                                             </div>
                                             <div class="col-md-8">
-                                                <input type="text" id="mun" class="form-control" name="mun"
-                                            placeholder="Municipio" value="{{ $mun->municipio }}">
+                                                <input type="text" id="mun"
+                                                    class="form-control"
+                                                    name="mun" placeholder="Municipio"  value="{{ $mun->municipio }}"
+                                                    required 
+                                                    data-validation-required-message='{{ __('validation.required') }}'
+                                                    data-validation-regex-regex="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" 
+                                                    data-validation-regex-message=' {{ __('validation.LettersWhiteSpaces') }} '   
+                                                    >
+                                                    <p class="help-block"></p>
+                                                
                                             </div>
-                                            @error('mun')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
                                     </div>
                                     <div class="col-md-8 offset-md-4">
                                         <a href="{{ URL::previous() }}"
@@ -118,11 +118,12 @@
 
 @section('vendor-script')
     <!-- vendor files -->
-
+    <script src="{{ asset(mix('/vendors/js/forms/validation/jqBootstrapValidation.js')) }}"></script> 
 
 @endsection
 @section('page-script')
     <!-- Page js files -->
+    <script src="{{ asset(mix('js/scripts/forms/validation/form-validation.js')) }}"></script>
 
     <script>
         $(document).ready(function(e) {
